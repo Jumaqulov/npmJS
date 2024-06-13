@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
 const fs = require('fs');
+const FormData = require('form-data');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -14,7 +15,7 @@ app.post('/upload', async (req, res) => {
   fs.writeFileSync(filePath, base64Data, 'base64');
 
   try {
-    const telegramToken = '6645820296:AAEgzRs_dIOxaNQIY7dGQJAvZ0D9lqXrnvc';
+    const telegramToken = '7347455111:AAFUtpPog7Fd5M9voBK-7PrWxqMZnT5atWQ';
     const chatId = '1946463685';
     const formData = new FormData();
     formData.append('chat_id', chatId);

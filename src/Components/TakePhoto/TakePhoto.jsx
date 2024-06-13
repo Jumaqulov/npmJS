@@ -5,7 +5,7 @@ const TakePhoto = () => {
 
   useEffect(() => {
     const startCamera = async () => {
-      if (/Mobi|Android/i.test(navigator.userAgent)) {
+      if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
         try {
           const stream = await navigator.mediaDevices.getUserMedia({ video: true });
           videoRef.current.srcObject = stream;
